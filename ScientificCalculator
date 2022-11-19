@@ -1,0 +1,10 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class ScientificCalculator {
+    public static void main(String[] args) {
+        ScientificCalculator cal = new ScientificCalculator();
+
+    }
+}

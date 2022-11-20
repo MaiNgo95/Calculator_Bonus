@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ScientificCalculator {
+public class ScientificCalculator implements ActionListener {
 
 	JFrame frame;
     JTextField textfield;
@@ -19,7 +19,7 @@ public class ScientificCalculator {
 
     ScientificCalculator() {
 
-        frame = new JFrame("Calculator");
+        frame = new JFrame(" Scientific Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(420, 700);
         frame.setLayout(null);

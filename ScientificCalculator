@@ -113,4 +113,96 @@ public class ScientificCalculator implements ActionListener {
         ScientificCalculator cal = new ScientificCalculator();
 
     }
+
+    public void actionPerformed(ActionEvent e) {
+
+        for (int i = 0; i < 10; i++) {
+            if (e.getSource() == numberButtons[i]) {
+                textfield.setText(textfield.getText().concat(String.valueOf(i)));
+            }
+        }
+        if (e.getSource() == decButton) {
+            textfield.setText(textfield.getText().concat("."));
+        }
+        if (e.getSource() == addButton) {
+            num1 = Double.parseDouble(textfield.getText());
+            operator = '+';
+            textfield.setText("");
+        }
+        if (e.getSource() == subButton) {
+            num1 = Double.parseDouble(textfield.getText());
+            operator = '-';
+            textfield.setText("");
+        }
+        if (e.getSource() == mulButton) {
+            num1 = Double.parseDouble(textfield.getText());
+            operator = '*';
+            textfield.setText("");
+        }
+        if (e.getSource() == divButton) {
+            num1 = Double.parseDouble(textfield.getText());
+            operator = '/';
+            textfield.setText("");
+        }
+        if (e.getSource() == squareButton) {
+            num1 = Double.parseDouble(textfield.getText());
+            operator = '^';
+            textfield.setText("");
+        }
+        
+        if (e.getSource() == logButton) {
+        	operator = 'l';
+        	textfield.setText("");
+        }
+        if(e.getSource() == sqrtButton) {
+        	operator = 's';
+        	textfield.setText("");
+        }
+        if (e.getSource() == equButton) {
+            num2 = Double.parseDouble(textfield.getText());
+
+            switch (operator) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    result = num1 / num2;
+                    break;
+                case '^':
+                    result = Math.pow(num1,num2);		
+                    break; 
+                case 'l':						
+                	result = Math.log(num2)/Math.log(10);  
+                	result = Math.round(result*1000000000) / 1000000000.0;	//9 decimal places format
+                	break;
+                case 's':
+                	result = Math.sqrt(num2);
+                	result = Math.round(result*100000000) / 100000000.0;	//8 decimal places format
+                	break;
+            }
+            textfield.setText(String.valueOf(result));
+            num1 = result;
+        }
+        if (e.getSource() == clrButton) {
+            textfield.setText("");
+        }
+        if (e.getSource() == delButton) {
+            String string = textfield.getText();
+            textfield.setText("");
+            for (int i = 0; i < string.length() - 1; i++) {
+                textfield.setText(textfield.getText() + string.charAt(i));
+            }
+        }
+        if (e.getSource() == negButton) {
+            double temp = Double.parseDouble(textfield.getText());
+            temp *= -1;
+            textfield.setText(String.valueOf(temp));
+        }
+    }
 }

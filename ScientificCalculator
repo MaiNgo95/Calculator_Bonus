@@ -125,27 +125,57 @@ public class ScientificCalculator implements ActionListener {
             textfield.setText(textfield.getText().concat("."));
         }
         if (e.getSource() == addButton) {
-            num1 = Double.parseDouble(textfield.getText());
+            if(textfield.getText().length() > 9) {
+            	//substring(0, 8). Takes only the first 8 digits.
+            	num1 = Double.parseDouble(textfield.getText().substring(0, 8));	
+            }
+            else {
+                num1 = Double.parseDouble(textfield.getText());
+            }    
             operator = '+';
             textfield.setText("");
         }
         if (e.getSource() == subButton) {
-            num1 = Double.parseDouble(textfield.getText());
+            if(textfield.getText().length() > 9) {
+            	//substring(0, 8). Takes only the first 8 digits.
+            	num1 = Double.parseDouble(textfield.getText().substring(0, 8));	
+            }
+            else {
+                num1 = Double.parseDouble(textfield.getText());
+            }    
             operator = '-';
             textfield.setText("");
         }
         if (e.getSource() == mulButton) {
-            num1 = Double.parseDouble(textfield.getText());
+            if(textfield.getText().length() > 9) {
+            	//substring(0, 8). Takes only the first 8 digits.
+            	num1 = Double.parseDouble(textfield.getText().substring(0, 8));	
+            }
+            else {
+                num1 = Double.parseDouble(textfield.getText());
+            }    
             operator = '*';
             textfield.setText("");
         }
         if (e.getSource() == divButton) {
-            num1 = Double.parseDouble(textfield.getText());
+            if(textfield.getText().length() > 9) {
+            	//substring(0, 8). Takes only the first 8 digits.
+            	num1 = Double.parseDouble(textfield.getText().substring(0, 8));	
+            }
+            else {
+                num1 = Double.parseDouble(textfield.getText());
+            }    
             operator = '/';
             textfield.setText("");
         }
         if (e.getSource() == squareButton) {
-            num1 = Double.parseDouble(textfield.getText());
+            if(textfield.getText().length() > 9) {
+            	//substring(0, 8). Takes only the first 8 digits.
+            	num1 = Double.parseDouble(textfield.getText().substring(0, 8));	
+            }
+            else {
+                num1 = Double.parseDouble(textfield.getText());
+            }    
             operator = '^';
             textfield.setText("");
         }
@@ -159,7 +189,13 @@ public class ScientificCalculator implements ActionListener {
         	textfield.setText("");
         }
         if (e.getSource() == equButton) {
-            num2 = Double.parseDouble(textfield.getText());
+            if(textfield.getText().length() > 9) {
+            	//substring(0, 8). Takes only the first 8 digits of the user input.
+            	num2 = Double.parseDouble(textfield.getText().substring(0, 8));	
+            }
+            else {
+                num2 = Double.parseDouble(textfield.getText());
+            }    
 
             switch (operator) {
                 case '+':
@@ -172,6 +208,10 @@ public class ScientificCalculator implements ActionListener {
                     result = num1 * num2;
                     break;
                 case '/':
+                    if(num2 == 0) {
+                        textfield.setText("Divide by 0 Error");
+                        return;
+                    }
                     result = num1 / num2;
                     break;
                 case '^':
@@ -179,15 +219,25 @@ public class ScientificCalculator implements ActionListener {
                     break; 
                 case 'l':						
                 	result = Math.log(num2)/Math.log(10);  
-                	result = Math.round(result*1000000000) / 1000000000.0;	//9 decimal places format
+                	result = Math.round(result*10000000) / 10000000.0;	//7 decimal places format
                 	break;
                 case 's':
                 	result = Math.sqrt(num2);
-                	result = Math.round(result*100000000) / 100000000.0;	//8 decimal places format
+                	result = Math.round(result*10000000) / 10000000.0;	//7 decimal places format
                 	break;
             }
-            textfield.setText(String.valueOf(result));
-            num1 = result;
+            /*
+             * Check whether the result is more than 8 digits. 
+             * If result is greater than 8 digits, then an ERR will display.
+             */
+            String resultString = String.valueOf(result);
+            if(resultString.length() > 10) {
+            	textfield.setText("ERR");
+            }
+            else {
+                textfield.setText(String.valueOf(result));
+                num1 = result;
+            }    
         }
         if (e.getSource() == clrButton) {
             textfield.setText("");
